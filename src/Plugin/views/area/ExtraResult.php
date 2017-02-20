@@ -63,7 +63,7 @@ class ExtraResult extends AreaPluginBase {
    * {@inheritdoc}
    */
   public function query() {
-    if (strpos($this->options['content'], '@total') !== FALSE) {
+    if (strpos($this->options['content'], '@total') || strpos($this->options['content'], '@more'))  {
       $this->view->get_total_rows = TRUE;
     }
   }
