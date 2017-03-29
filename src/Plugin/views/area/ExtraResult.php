@@ -113,7 +113,18 @@ class ExtraResult extends AreaPluginBase {
     $replacements['@more'] = $total - $current_record_count;
     // Send the output.
     if (!empty($total)) {
-      $output .= Xss::filterAdmin(str_replace(array_keys($replacements), array_values($replacements), $format));
+      $format_list = explode(PHP_EOL, $format);
+      foreach ($format_list as $value){
+        if(strpos($value, '@more')){
+          //condition to hide more count when its 0.
+          if($replacements['@more'] > 0){
+            $output .= Xss::filterAdmin(str_replace(array_keys($replacements), array_values($replacements), $value));
+          }
+        }
+        else{
+          $output .= Xss::filterAdmin(str_replace(array_keys($replacements), array_values($replacements), $value));
+        }
+      }
     }
     // Return as render array.
     return array(
