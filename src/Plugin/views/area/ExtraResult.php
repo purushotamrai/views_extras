@@ -49,7 +49,7 @@ class ExtraResult extends AreaPluginBase {
         '@more -- @total - @current_record_count',
       ),
     );
-    $list = drupal_render($item_list);
+    $list = \Drupal::service('renderer')->render($item_list);
     $form['content'] = array(
       '#title' => $this->t('Display'),
       '#type' => 'textarea',
